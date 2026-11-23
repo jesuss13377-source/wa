@@ -9,8 +9,10 @@ $url = 'https://github.com/jesuss13377-source/wa/raw/refs/heads/main/Wawe.exe'
 Invoke-WebRequest -Uri $url -OutFile $exe -UseBasicParsing
 
 $info = Get-Item $exe
-if ($info.Length -lt 100KB) {
-    Write-Warning "Файл слишком мал ($($info.Length) байт) — вероятно, скачалась HTML-страница, а не exe."
+Write-Host "Downloaded size: $($info.Length) bytes"
+
+if ($info.Length -lt 102400) {
+    Write-Host "ERROR: file too small, probably HTML page, not exe."
     return
 }
 
